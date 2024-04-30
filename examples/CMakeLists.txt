@@ -1,0 +1,8 @@
+include_directories(../include)
+add_executable(example_1 example_1.c)
+add_executable(example_2 example_2.c)
+add_executable(example_3 example_3.c)
+target_link_libraries(example_1 -lallegro -lallegro_primitives -lallegro_font -lallegro_ttf ${CMAKE_CURRENT_BINARY_DIR}/../src/liballegro_ui.a)
+target_link_libraries(example_2 -lallegro -lallegro_primitives -lallegro_font -lallegro_ttf ${CMAKE_CURRENT_BINARY_DIR}/../src/liballegro_ui.a)
+target_link_libraries(example_3 -lallegro -lallegro_primitives -lallegro_font -lallegro_ttf ${CMAKE_CURRENT_BINARY_DIR}/../src/liballegro_ui.a)
+add_compile_options(-O0)
