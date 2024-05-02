@@ -1,3 +1,6 @@
 include_directories(../include)
+if (DEFINED ALLEGRO_INCLUDE_DIR)
+	include_directories(${ALLEGRO_INCLUDE_DIR})
+endif()
 file(GLOB SRC_FILES *.c)
 add_library(allegro_ui STATIC ${SRC_FILES})
