@@ -33,7 +33,7 @@ void al_ui_border_render(ALLEGRO_UI_WIDGET* border, float x, float y, float widt
 float al_ui_border_get_width(ALLEGRO_UI_WIDGET* border, float width) {
     float child_width = 0.0;
     if (border->border.child != NULL) {
-        child_width = al_ui_get_width(border->border.child, width);
+        child_width = al_ui_get_width(border->border.child, width - border->border.thickness * 2);
     }
     return child_width + border->border.thickness * 2;
 }
@@ -41,7 +41,7 @@ float al_ui_border_get_width(ALLEGRO_UI_WIDGET* border, float width) {
 float al_ui_border_get_height(ALLEGRO_UI_WIDGET* border, float height) {
     float child_height = 0.0;
     if (border->border.child != NULL) {
-        child_height = al_ui_get_height(border->border.child, height);
+        child_height = al_ui_get_height(border->border.child, height - border->border.thickness * 2);
     }
     return child_height + border->border.thickness * 2;
 }
