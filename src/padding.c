@@ -26,7 +26,7 @@ void al_ui_padding_render(ALLEGRO_UI_WIDGET* padding, float x, float y, float wi
 float al_ui_padding_get_width(ALLEGRO_UI_WIDGET* padding, float width) {
     float child_width = 0.0;
     if (padding->padding.child != NULL) {
-        child_width = al_ui_get_width(padding->padding.child, width - padding.padding.left - padding.padding.right);
+        child_width = al_ui_get_width(padding->padding.child, width - padding->padding.left - padding->padding.right);
     }
     return padding->padding.left + child_width + padding->padding.right;
 }
