@@ -1,9 +1,12 @@
 #include "vbox.h"
 
-ALLEGRO_UI_WIDGET* al_ui_new_vbox() {
+ALLEGRO_UI_WIDGET* al_ui_new_vbox(ALLEGRO_UI_WIDGET** children, size_t n_children) {
     ALLEGRO_UI_WIDGET* vbox = malloc(sizeof(ALLEGRO_UI_WIDGET));
     vbox->vbox.type = ALLEGRO_UI_WIDGET_TYPE_VBOX;
     vbox->vbox.children = construct_vector(sizeof(ALLEGRO_UI_WIDGET*));
+	for (size_t i = 0; i < n_children; i++) {
+		vector_enqueue(&vbox->vbox.children, &children[i]);
+	}
     return vbox;
 }
 

@@ -142,19 +142,17 @@ int main() {
 
     // setup_scene();
     ALLEGRO_FONT* font = al_create_builtin_font();
-    ALLEGRO_UI_WIDGET* label_1 = al_ui_new_label(font, al_map_rgb(255, 255, 255), "This is a label");
-    ALLEGRO_UI_WIDGET* label_2 = al_ui_new_center_height(
-        al_ui_new_label(font, al_map_rgb(255, 255, 255), "This is a different label")
-    );
-    ALLEGRO_UI_WIDGET* label_3 = al_ui_new_center_height(
-        al_ui_new_label(font, al_map_rgb(255, 255, 255), "They are all in a vbox")
-    );
-    ALLEGRO_UI_WIDGET* label_4 = al_ui_new_label(font, al_map_rgb(255, 255, 255), "WOW, isn't that cool?");
-    ALLEGRO_UI_WIDGET* vbox = al_ui_new_vbox();
-    vector_enqueue(&vbox->vbox.children, &label_1);
-    vector_enqueue(&vbox->vbox.children, &label_2);
-    vector_enqueue(&vbox->vbox.children, &label_3);
-    vector_enqueue(&vbox->vbox.children, &label_4);
+	ALLEGRO_UI_WIDGET* vbox_children[] = {
+		al_ui_new_label(font, al_map_rgb(255, 255, 255), "This is a label"),
+		al_ui_new_center_height(
+			al_ui_new_label(font, al_map_rgb(255, 255, 255), "This is a different label")
+		),
+		al_ui_new_center_height(
+			al_ui_new_label(font, al_map_rgb(255, 255, 255), "They are all in a vbox")
+		),
+		al_ui_new_label(font, al_map_rgb(255, 255, 255), "WOW, isn't that cool?")
+	};
+    ALLEGRO_UI_WIDGET* vbox = al_ui_new_vbox(vbox_children, 4);
     wid = al_ui_new_center_width(vbox);
 
     bool done = false;

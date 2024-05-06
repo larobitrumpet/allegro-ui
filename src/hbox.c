@@ -1,9 +1,12 @@
 #include "hbox.h"
 
-ALLEGRO_UI_WIDGET* al_ui_new_hbox() {
+ALLEGRO_UI_WIDGET* al_ui_new_hbox(ALLEGRO_UI_WIDGET** children, size_t n_children) {
     ALLEGRO_UI_WIDGET* hbox = malloc(sizeof(ALLEGRO_UI_WIDGET));
     hbox->hbox.type = ALLEGRO_UI_WIDGET_TYPE_HBOX;
     hbox->hbox.children = construct_vector(sizeof(ALLEGRO_UI_WIDGET*));
+	for (size_t i = 0; i < n_children; i++) {
+		vector_enqueue(&hbox->hbox.children, &children[i]);
+	}
     return hbox;
 }
 

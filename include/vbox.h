@@ -4,7 +4,7 @@
 #include "widget.h"
 #include "vector.h"
 
-ALLEGRO_UI_WIDGET* al_ui_new_vbox();
+ALLEGRO_UI_WIDGET* al_ui_new_vbox(ALLEGRO_UI_WIDGET** children, size_t n_children);
 void al_ui_destroy_vbox(ALLEGRO_UI_WIDGET* vbox);
 void al_ui_vbox_render(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height);
 float al_ui_vbox_get_width(ALLEGRO_UI_WIDGET* vbox, float width);
