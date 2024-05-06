@@ -1,5 +1,5 @@
 #ifndef ALLEGRO_UI_PADDING_H
-#define ALLEGOR_UI_PADDING_H
+#define ALLEGRO_UI_PADDING_H
 
 #include "widget.h"
 
