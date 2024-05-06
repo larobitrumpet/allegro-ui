@@ -26,7 +26,7 @@ void al_ui_border_render(ALLEGRO_UI_WIDGET* border, float x, float y, float widt
     float half_thickness = border->border.thickness / 2;
     al_draw_rectangle(x + half_thickness, y + half_thickness, x + w - half_thickness, y + h - half_thickness, border->border.color, border->border.thickness);
     if (border->border.child != NULL) {
-        al_ui_render(border->border.child, x + border->border.thickness, y + border->border.thickness, w - border->border.thickness, h - border->border.thickness);
+        al_ui_render(border->border.child, x + border->border.thickness, y + border->border.thickness, w - border->border.thickness * 2, h - border->border.thickness * 2);
     }
 }
 
