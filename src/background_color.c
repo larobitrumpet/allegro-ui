@@ -39,9 +39,9 @@ float al_ui_background_color_get_height(ALLEGRO_UI_WIDGET* back, float height) {
     return al_ui_get_height(back->background_color.child, height);
 }
 
-void al_ui_background_color_handle_event(ALLEGRO_UI_WIDGET* back, float x, float  y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_background_color_handle_event(ALLEGRO_UI_WIDGET* back, float x, float  y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     if (back->background_color.child != NULL)
-        al_ui_widget_handle_event(back->background_color.child, x, y, width, height, event);
+        al_ui_widget_handle_event(back->background_color.child, x, y, width, height, mouse_pos_x, mouse_pos_y, event);
 }
 
 bool al_ui_background_color_expands_x(ALLEGRO_UI_WIDGET* back) {

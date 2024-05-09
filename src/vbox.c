@@ -117,13 +117,15 @@ static bool vbox_children_handle_event(void* child, void* params) {
     float* y = pars[1];
     float* width = pars[2];
     float* height = pars[3];
-    ALLEGRO_EVENT* event = pars[4];
-    al_ui_widget_handle_event(*(ALLEGRO_UI_WIDGET**)child, *x, *y, *width, *height, event);
+	float* mouse_pos_x = pars[4];
+	float* mouse_pos_y = pars[5];
+    ALLEGRO_EVENT* event = pars[6];
+    al_ui_widget_handle_event(*(ALLEGRO_UI_WIDGET**)child, *x, *y, *width, *height, *mouse_pos_x, *mouse_pos_y, event);
     *y = *y + al_ui_get_height(*(ALLEGRO_UI_WIDGET**)child, *height);
     return false;
 }
 
-void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     float h;
     int num = 0;
     vector_iterate(&vbox->vbox.children, vbox_count_y_expand, &num);
@@ -135,7 +137,7 @@ void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float wi
     } else {
         h = height;
     }
-    void* params[5] = {(void*)&x, (void*)&y, (void*)&width, (void*)&h, (void*)event};
+    void* params[] = {(void*)&x, (void*)&y, (void*)&width, (void*)&h, (void*)&mouse_pos_x, (void*)&mouse_pos_y, (void*)event};
     vector_iterate(&vbox->vbox.children, vbox_children_handle_event, params);
 }
 

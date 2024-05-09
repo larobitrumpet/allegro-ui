@@ -92,7 +92,7 @@ float al_ui_text_box_get_height(ALLEGRO_UI_WIDGET* box, float height) {
     return al_ui_get_height(box->text_box.child, height);
 }
 
-void al_ui_text_box_handle_event(ALLEGRO_UI_WIDGET* box, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_text_box_handle_event(ALLEGRO_UI_WIDGET* box, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     switch (event->type) {
         case ALLEGRO_EVENT_TIMER:
             if (!box->text_box.has_focus)
@@ -181,9 +181,9 @@ void al_ui_text_box_handle_event(ALLEGRO_UI_WIDGET* box, float x, float y, float
                 float w = al_ui_text_box_get_width(box, width);
                 float h = al_ui_text_box_get_height(box, height);
 
-                box->text_box.has_focus = al_ui_mouse_pos_x >= x && al_ui_mouse_pos_x <= (x + w) && al_ui_mouse_pos_y >= y && al_ui_mouse_pos_y <= (y + h);
+                box->text_box.has_focus = mouse_pos_x >= x && mouse_pos_x <= (x + w) && mouse_pos_y >= y && mouse_pos_y <= (y + h);
                 if (box->text_box.has_focus) {
-                    float lx = al_ui_mouse_pos_x - x - box->text_box.child->border.thickness - box->text_box.child->border.child->padding.right;
+                    float lx = mouse_pos_x - x - box->text_box.child->border.thickness - box->text_box.child->border.child->padding.right;
                     char* text = (char*)malloc(sizeof(char) * (box->text_box.text_end + 1));
                     text[0] = (*box->text_box.text)[0];
                     for (size_t i = 1; i <= box->text_box.text_end + 1; i++) {

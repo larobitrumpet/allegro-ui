@@ -9,7 +9,7 @@ void al_ui_destroy_background_color(ALLEGRO_UI_WIDGET* back);
 void al_ui_background_color_render(ALLEGRO_UI_WIDGET* back, float x, float y, float width, float height);
 float al_ui_background_color_get_width(ALLEGRO_UI_WIDGET* back, float width);
 float al_ui_background_color_get_height(ALLEGRO_UI_WIDGET* back, float height);
-void al_ui_background_color_handle_event(ALLEGRO_UI_WIDGET* back, float x, float  y, float width, float height, ALLEGRO_EVENT* event);
+void al_ui_background_color_handle_event(ALLEGRO_UI_WIDGET* back, float x, float  y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event);
 bool al_ui_background_color_expands_x(ALLEGRO_UI_WIDGET* back);
 bool al_ui_background_color_expands_y(ALLEGRO_UI_WIDGET* back);
 

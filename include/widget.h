@@ -136,13 +136,11 @@ union ALLEGRO_UI_WIDGET {
     ALLEGRO_UI_VBOX vbox;
 };
 
-extern float al_ui_mouse_pos_x;
-extern float al_ui_mouse_pos_y;
 void al_ui_destroy_widget(ALLEGRO_UI_WIDGET* widget);
 void al_ui_render(ALLEGRO_UI_WIDGET* widget, float x, float y, float width, float height);
 float al_ui_get_width(ALLEGRO_UI_WIDGET* widget, float width);
 float al_ui_get_height(ALLEGRO_UI_WIDGET* widget, float height);
-void al_ui_widget_handle_event(ALLEGRO_UI_WIDGET* widget, float widget_x, float widget_y, float width, float height, ALLEGRO_EVENT* event);
+void al_ui_widget_handle_event(ALLEGRO_UI_WIDGET* widget, float widget_x, float widget_y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event);
 bool al_ui_expands_x(ALLEGRO_UI_WIDGET* widget);
 bool al_ui_expands_y(ALLEGRO_UI_WIDGET* widget);
 

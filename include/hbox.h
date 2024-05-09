@@ -9,7 +9,7 @@ void al_ui_hbox_render(ALLEGRO_UI_WIDGET* hbox, float x, float y, float width, f
 void al_ui_destroy_hbox(ALLEGRO_UI_WIDGET* hbox);
 float al_ui_hbox_get_width(ALLEGRO_UI_WIDGET* hbox, float width);
 float al_ui_hbox_get_height(ALLEGRO_UI_WIDGET* hbox, float height);
-void al_ui_hbox_handle_event(ALLEGRO_UI_WIDGET* hbox, float x, float y, float width, float height, ALLEGRO_EVENT* event);
+void al_ui_hbox_handle_event(ALLEGRO_UI_WIDGET* hbox, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event);
 bool al_ui_hbox_expands_x(ALLEGRO_UI_WIDGET* hbox);
 bool al_ui_hbox_expands_y(ALLEGRO_UI_WIDGET* hbox);
 

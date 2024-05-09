@@ -9,7 +9,7 @@ void al_ui_destroy_vbox(ALLEGRO_UI_WIDGET* vbox);
 void al_ui_vbox_render(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height);
 float al_ui_vbox_get_width(ALLEGRO_UI_WIDGET* vbox, float width);
 float al_ui_vbox_get_height(ALLEGRO_UI_WIDGET* vbox, float height);
-void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height, ALLEGRO_EVENT* event);
+void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event);
 bool al_ui_vbox_expands_x(ALLEGRO_UI_WIDGET* vbox);
 bool al_ui_vbox_expands_y(ALLEGRO_UI_WIDGET* vbox);
 

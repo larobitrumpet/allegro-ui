@@ -39,9 +39,9 @@ float al_ui_padding_get_height(ALLEGRO_UI_WIDGET* padding, float height) {
     return padding->padding.up + child_height + padding->padding.down;
 }
 
-void al_ui_padding_handle_event(ALLEGRO_UI_WIDGET* padding, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_padding_handle_event(ALLEGRO_UI_WIDGET* padding, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     if (padding->padding.child != NULL)
-        al_ui_widget_handle_event(padding->padding.child, x + padding->padding.left, y + padding->padding.up, width - padding->padding.left - padding->padding.right, height - padding->padding.up - padding->padding.down, event);
+        al_ui_widget_handle_event(padding->padding.child, x + padding->padding.left, y + padding->padding.up, width - padding->padding.left - padding->padding.right, height - padding->padding.up - padding->padding.down, mouse_pos_x, mouse_pos_y, event);
 }
 
 bool al_ui_padding_expands_x(ALLEGRO_UI_WIDGET* padding) {

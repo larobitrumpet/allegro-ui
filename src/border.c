@@ -46,13 +46,13 @@ float al_ui_border_get_height(ALLEGRO_UI_WIDGET* border, float height) {
     return child_height + border->border.thickness * 2;
 }
 
-void al_ui_border_handle_event(ALLEGRO_UI_WIDGET* border, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_border_handle_event(ALLEGRO_UI_WIDGET* border, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     if (border->border.child == NULL)
         return;
 
     float w = al_ui_border_get_width(border, width);
     float h = al_ui_border_get_height(border, height);
-    al_ui_widget_handle_event(border->border.child, x + border->border.thickness, y + border->border.thickness, w - border->border.thickness, h - border->border.thickness, event);
+    al_ui_widget_handle_event(border->border.child, x + border->border.thickness, y + border->border.thickness, w - border->border.thickness, h - border->border.thickness, mouse_pos_x, mouse_pos_y, event);
 }
 
 bool al_ui_border_expands_x(ALLEGRO_UI_WIDGET* border) {

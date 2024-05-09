@@ -32,14 +32,14 @@ float al_ui_button_get_height(ALLEGRO_UI_WIDGET* button, float height) {
     return 0.0;
 }
 
-void al_ui_button_handle_event(ALLEGRO_UI_WIDGET* button, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_button_handle_event(ALLEGRO_UI_WIDGET* button, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     switch (event->type) {
         case ALLEGRO_EVENT_MOUSE_BUTTON_DOWN:
             if (event->mouse.button & 1) {
                 float w = al_ui_button_get_width(button, width);
                 float h = al_ui_button_get_height(button, height);
 
-                if (al_ui_mouse_pos_x >= x && al_ui_mouse_pos_x <= (x + w) && al_ui_mouse_pos_y >= y && al_ui_mouse_pos_y <= (y + h)) {
+                if (mouse_pos_x >= x && mouse_pos_x <= (x + w) && mouse_pos_y >= y && mouse_pos_y <= (y + h)) {
                     if (button->button.on_click != NULL)
                         button->button.on_click(button->button.data);
                 }
@@ -48,7 +48,7 @@ void al_ui_button_handle_event(ALLEGRO_UI_WIDGET* button, float x, float y, floa
     }
 
     if (button->button.child != NULL)
-        al_ui_widget_handle_event(button->button.child, x, y, width, height, event);
+        al_ui_widget_handle_event(button->button.child, x, y, width, height, mouse_pos_x, mouse_pos_y, event);
 }
 
 bool al_ui_button_expands_x(ALLEGRO_UI_WIDGET* button) {

@@ -29,7 +29,7 @@ void al_ui_text_box_set_text(ALLEGRO_UI_WIDGET* box, char* text);
 void al_ui_text_box_render(ALLEGRO_UI_WIDGET* box, float x, float y, float width, float height);
 float al_ui_text_box_get_width(ALLEGRO_UI_WIDGET* box, float width);
 float al_ui_text_box_get_height(ALLEGRO_UI_WIDGET* box, float height);
-void al_ui_text_box_handle_event(ALLEGRO_UI_WIDGET* box, float x, float y, float width, float height, ALLEGRO_EVENT* event);
+void al_ui_text_box_handle_event(ALLEGRO_UI_WIDGET* box, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event);
 bool al_ui_text_box_expands_x(ALLEGRO_UI_WIDGET* box);
 bool al_ui_text_box_expands_y(ALLEGRO_UI_WIDGET* box);
 

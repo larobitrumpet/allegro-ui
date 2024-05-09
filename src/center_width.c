@@ -33,11 +33,11 @@ float al_ui_center_width_get_height(ALLEGRO_UI_WIDGET* center, float height) {
     return child;
 }
 
-void al_ui_center_width_handle_event(ALLEGRO_UI_WIDGET* center, float x, float y, float width, float height, ALLEGRO_EVENT* event) {
+void al_ui_center_width_handle_event(ALLEGRO_UI_WIDGET* center, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
     if (center->center_width.child == NULL)
         return;
     float w = al_ui_get_width(center->center_width.child, width);
-    al_ui_widget_handle_event(center->center_width.child, x + (width / 2.0) - (w / 2.0), y, w, height, event);
+    al_ui_widget_handle_event(center->center_width.child, x + (width / 2.0) - (w / 2.0), y, w, height, mouse_pos_x, mouse_pos_y, event);
 }
 
 bool al_ui_center_width_expands_x(ALLEGRO_UI_WIDGET* center) {
