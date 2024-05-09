@@ -9,11 +9,11 @@
 #define VECTOR_SIZE_INCREASE 1.5
 
 typedef struct VECTOR {
-    void* v;
-    size_t bytewidth;
-    int size;
-    int head;
-    int tail;
+	void* v;
+	size_t bytewidth;
+	int size;
+	int head;
+	int tail;
 } VECTOR;
 
 VECTOR construct_vector(size_t bytewidth);
