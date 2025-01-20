@@ -3,9 +3,9 @@
 ALLEGRO_UI_WIDGET* al_ui_new_vbox(ALLEGRO_UI_WIDGET** children, size_t n_children) {
 	ALLEGRO_UI_WIDGET* vbox = malloc(sizeof(ALLEGRO_UI_WIDGET));
 	vbox->vbox.type = ALLEGRO_UI_WIDGET_TYPE_VBOX;
-	vbox->vbox.children = construct_vector(sizeof(ALLEGRO_UI_WIDGET*));
+	vbox->vbox.children = lucu_vector_new(sizeof(ALLEGRO_UI_WIDGET*), NULL);
 	for (size_t i = 0; i < n_children; i++) {
-		vector_enqueue(&vbox->vbox.children, &children[i]);
+		lucu_vector_enqueue(vbox->vbox.children, &children[i]);
 	}
 	return vbox;
 }
@@ -16,8 +16,8 @@ static bool vbox_destroy_children(void* widget, void* _) {
 }
 
 void al_ui_destroy_vbox(ALLEGRO_UI_WIDGET* vbox) {
-	vector_iterate(&vbox->vbox.children, vbox_destroy_children, NULL);
-	deconstruct_vector(vbox->vbox.children);
+	lucu_vector_iterate(vbox->vbox.children, vbox_destroy_children, NULL);
+	lucu_vector_destroy(vbox->vbox.children);
 	free(vbox);
 }
 
@@ -49,17 +49,17 @@ static bool vbox_non_expand_y_total_height_func(void* widget, void* params) {
 void al_ui_vbox_render(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height) {
 	float h;
 	int num = 0;
-	vector_iterate(&vbox->vbox.children, vbox_count_y_expand, &num);
+	lucu_vector_iterate(vbox->vbox.children, vbox_count_y_expand, &num);
 	float total_non_expand_y_height = 0;
 	if (num != 0) {
 		void* params[2] = {(void*)&total_non_expand_y_height, (void*)&height};
-		vector_iterate(&vbox->vbox.children, vbox_non_expand_y_total_height_func, params);
+		lucu_vector_iterate(vbox->vbox.children, vbox_non_expand_y_total_height_func, params);
 		h = (height - total_non_expand_y_height) / num;
 	} else {
 		h = height;
 	}
 	void* params[4] = {(void*)&x, (void*)&y, (void*)&width, (void*)&h};
-	vector_iterate(&vbox->vbox.children, vbox_render_children, params);
+	lucu_vector_iterate(vbox->vbox.children, vbox_render_children, params);
 }
 
 static void* vbox_child_width_func(void* widget, void* params) {
@@ -80,8 +80,10 @@ float al_ui_vbox_get_width(ALLEGRO_UI_WIDGET* vbox, float width) {
 		return width;
 	float f;
 	void* params[2] = {(void*)&f, (void*)&width};
-	VECTOR widths = vector_map(&vbox->vbox.children, sizeof(float), vbox_child_width_func, params);
-	return *(float*)vector_min_max(&widths, float_greater_than, NULL);
+	LucuVector widths = lucu_vector_map(vbox->vbox.children, sizeof(float), NULL, vbox_child_width_func, params);
+	float w = *(float*)lucu_vector_min_max(widths, float_greater_than, NULL);
+	lucu_vector_destroy(widths);
+	return w;
 }
 
 static void* vbox_child_height_func(void* widget, void* params) {
@@ -105,9 +107,10 @@ float al_ui_vbox_get_height(ALLEGRO_UI_WIDGET* vbox, float height) {
 		return height;
 	float f;
 	void* params[2] = {(void*)&f, (void*)&height};
-	VECTOR heights = vector_map(&vbox->vbox.children, sizeof(float), vbox_child_height_func, params);
+	LucuVector heights = lucu_vector_map(vbox->vbox.children, sizeof(float), NULL, vbox_child_height_func, params);
 	float sum = 0;
-	vector_iterate(&heights, sum_floats, (void*)&sum);
+	lucu_vector_iterate(heights, sum_floats, (void*)&sum);
+	lucu_vector_destroy(heights);
 	return sum;
 }
 
@@ -128,17 +131,17 @@ static bool vbox_children_handle_event(void* child, void* params) {
 void al_ui_vbox_handle_event(ALLEGRO_UI_WIDGET* vbox, float x, float y, float width, float height, float mouse_pos_x, float mouse_pos_y, ALLEGRO_EVENT* event) {
 	float h;
 	int num = 0;
-	vector_iterate(&vbox->vbox.children, vbox_count_y_expand, &num);
+	lucu_vector_iterate(vbox->vbox.children, vbox_count_y_expand, &num);
 	float total_non_expand_y_height = 0;
 	if (num != 0) {
 		void* params[2] = {(void*)&total_non_expand_y_height, (void*)&height};
-		vector_iterate(&vbox->vbox.children, vbox_non_expand_y_total_height_func, params);
+		lucu_vector_iterate(vbox->vbox.children, vbox_non_expand_y_total_height_func, params);
 		h = (height - total_non_expand_y_height) / num;
 	} else {
 		h = height;
 	}
 	void* params[] = {(void*)&x, (void*)&y, (void*)&width, (void*)&h, (void*)&mouse_pos_x, (void*)&mouse_pos_y, (void*)event};
-	vector_iterate(&vbox->vbox.children, vbox_children_handle_event, params);
+	lucu_vector_iterate(vbox->vbox.children, vbox_children_handle_event, params);
 }
 
 static bool vbox_expands_x_itter_func(void* widget, void* expands) {
@@ -153,7 +156,7 @@ static bool vbox_expands_x_itter_func(void* widget, void* expands) {
 
 bool al_ui_vbox_expands_x(ALLEGRO_UI_WIDGET* vbox) {
 	bool expands = false;
-	vector_iterate(&vbox->vbox.children, vbox_expands_x_itter_func, &expands);
+	lucu_vector_iterate(vbox->vbox.children, vbox_expands_x_itter_func, &expands);
 	return expands;
 }
 
@@ -169,6 +172,6 @@ static bool vbox_expands_y_itter_func(void* widget, void* expands) {
 
 bool al_ui_vbox_expands_y(ALLEGRO_UI_WIDGET* vbox) {
 	bool expands = false;
-	vector_iterate(&vbox->vbox.children, vbox_expands_y_itter_func, &expands);
+	lucu_vector_iterate(vbox->vbox.children, vbox_expands_y_itter_func, &expands);
 	return expands;
 }

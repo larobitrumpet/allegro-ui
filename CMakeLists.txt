@@ -17,6 +17,8 @@ if (CMAKE_PROJECT_NAME STREQUAL PROJECT_NAME)
 	set_property(GLOBAL PROPERTY USE_FOLDERS ON)
 endif()
 
+find_package(lucu REQUIRED)
+
 find_package(PkgConfig REQUIRED)
 
 if (${ALLEGRO_STATIC})

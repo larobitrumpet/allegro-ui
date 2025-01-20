@@ -5,7 +5,7 @@
 #include <allegro5/allegro5.h>
 #include <allegro5/allegro_font.h>
 #include <allegro5/allegro_ttf.h>
-#include "vector.h"
+#include <lucu/vector.h>
 
 typedef enum ALLEGRO_UI_WIDGET_TYPE {
 	ALLEGRO_UI_WIDGET_TYPE_LABEL,
@@ -110,14 +110,14 @@ typedef struct ALLEGRO_UI_HBOX {
 	_ALLEGRO_UI_WIDGET_HEADER
 
 	// vector to pointers of chlidren
-	VECTOR children;
+	LucuVector children;
 } ALLEGRO_UI_HBOX;
 
 typedef struct ALLEGRO_UI_VBOX {
 	_ALLEGRO_UI_WIDGET_HEADER
 
 	// vector to pointers of children
-	VECTOR children;
+	LucuVector children;
 } ALLEGRO_UI_VBOX;
 
 union ALLEGRO_UI_WIDGET {

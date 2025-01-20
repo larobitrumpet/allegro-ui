@@ -2,7 +2,7 @@
 #define ALLEGRO_UI_HBOX_H
 
 #include "widget.h"
-#include "vector.h"
+#include <lucu/vector.h>
 
 ALLEGRO_UI_WIDGET* al_ui_new_hbox(ALLEGRO_UI_WIDGET** children, size_t n_children);
 void al_ui_hbox_render(ALLEGRO_UI_WIDGET* hbox, float x, float y, float width, float height);

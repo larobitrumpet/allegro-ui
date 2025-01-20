@@ -2,7 +2,7 @@
 #define ALLEGRO_UI_VBOX_H
 
 #include "widget.h"
-#include "vector.h"
+#include <lucu/vector.h>
 
 ALLEGRO_UI_WIDGET* al_ui_new_vbox(ALLEGRO_UI_WIDGET** children, size_t n_children);
 void al_ui_destroy_vbox(ALLEGRO_UI_WIDGET* vbox);
