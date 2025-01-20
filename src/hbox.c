@@ -83,7 +83,7 @@ float al_ui_hbox_get_width(ALLEGRO_UI_WIDGET* hbox, float width) {
 		return width;
 	float f;
 	void* params[2] = {(void*)&f, (void*)&width};
-	LucuVector widths = lucu_vector_map(hbox->hbox.children, sizeof(float), NULL, hbox_child_width_func, params);
+	LucuVector widths = lucu_vector_map(hbox->hbox.children, sizeof(float), NULL, hbox_child_width_func, NULL, params);
 	float sum = 0;
 	lucu_vector_iterate(widths, sum_floats, (void*)&sum);
 	lucu_vector_destroy(widths);
@@ -108,7 +108,7 @@ float al_ui_hbox_get_height(ALLEGRO_UI_WIDGET* hbox, float height) {
 		return height;
 	float f;
 	void* params[2] = {(void*)&f, (void*)&height};
-	LucuVector heights = lucu_vector_map(hbox->hbox.children, sizeof(float), NULL, hbox_child_height_func, params);
+	LucuVector heights = lucu_vector_map(hbox->hbox.children, sizeof(float), NULL, hbox_child_height_func, NULL, params);
 	float h = *(float*)lucu_vector_min_max(heights, float_greater_than, NULL);
 	lucu_vector_destroy(heights);
 	return h;
