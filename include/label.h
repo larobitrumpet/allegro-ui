@@ -1,4 +1,4 @@
-#ifndef ALLEGOR_UI_LABEL_H
+#ifndef ALLEGRO_UI_LABEL_H
 #define ALLEGRO_UI_LABEL_H
 
 #include <allegro5/allegro5.h>
